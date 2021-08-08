@@ -28,35 +28,35 @@ export default function scatter(chart: Chart) {
       }
 
       const innerSelection = d3Select(this)
-        .selectAll(':scope > circle')
+        .selectAll('circle')
         .data(joined)
 
       const innerSelectionEnter = innerSelection.enter()
         .append('circle')
 
-      const selection = innerSelection.merge(innerSelectionEnter)
-        .attr('fill', d3Hsl(color.toString()).brighter(1.5).hex())
-        .attr('stroke', color)
-        .attr('opacity', 0.7)
-        .attr('r', 1)
+      const selectionCircle = innerSelection.merge(innerSelectionEnter)
+        .attr('fill', color)
+        .attr('opacity', 0.8)
+        .attr('r', 2)
         .attr('cx', function (d) { return xScale(d[0]) })
         .attr('cy', function (d) { return yScale(d[1]) });
 
-      // const innerSelection = d3Select(this)
-      //   .selectAll(':scope > text')
-      //   .data(joined)
+      const innerSelectionText = d3Select(this)
+        .selectAll(':scope > text')
+        .data(joined)
 
-      // const innerSelectionEnter = innerSelection.enter()
-      //   .append('text')
+      const innerSelectionEnterText = innerSelectionText.enter()
+        .append('text')
 
-      // const selection = innerSelection.merge(innerSelectionEnter)
-      //   .attr('fill', d3Hsl(color.toString()).brighter(1.5).hex())
-      //   .attr('stroke', color)
-      //   // .attr('opacity', 0.7)
-      //   // .attr('r', 3)
-      //   .attr('x', function (d) { return xScale(d[0]) })
-      //   .attr('y', function (d) { return yScale(d[1]) })
-      //   .text("test");
+      const selectionText = innerSelectionText.merge(innerSelectionEnterText)
+        .attr('fill', color)
+        .attr('opacity', 0.8)
+        // .attr('r', 3)
+        .attr('x', function (d) { return xScale(d[0])+5 })
+        .attr('y', function (d) { return yScale(d[1])-5 })
+        .text(function (d) { return `( ${d[0]} , ${d[1]} )` });
+
+      const selection = selectionCircle.merge(selectionText);
 
       if (d.attr) {
         for (let k in d.attr) {
