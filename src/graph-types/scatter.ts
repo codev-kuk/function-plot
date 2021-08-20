@@ -50,7 +50,7 @@ export default function scatter(chart: Chart) {
 
       const selectionText = innerSelectionText.merge(innerSelectionEnterText)
         .attr('fill', color)
-        .attr('stroke', "#FFFFFF")
+        // .attr('stroke', "#FFFFFF")
         .attr('opacity', 0.8)
         // .attr('r', 3)
         .attr('x', function (d) { return xScale(d[0])+5 })
